@@ -284,6 +284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2105fed67a4c10e4db0e963b6fd72162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mana: {fileID: 8521440848074395317}
+  health: {fileID: 440776367197932143}
+  attack: {fileID: 8565820744848742337}
 --- !u!1 &1884693987229812334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,7 +1036,7 @@ GameObject:
   - component: {fileID: 6790782424540348044}
   - component: {fileID: 6912553849848810712}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: AttackImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1131,7 +1134,7 @@ GameObject:
   - component: {fileID: 1159449629090337325}
   - component: {fileID: 7445529368652631921}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: HP_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1634,7 +1637,7 @@ GameObject:
   - component: {fileID: 3596262896894108749}
   - component: {fileID: 5441805876613512467}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ManaImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
