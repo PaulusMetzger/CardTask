@@ -534,11 +534,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dcb6380506d3c147a652a13d8a58121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardQuantaty: 3
+  cardQuantaty: 0
   cardPrefab: {fileID: 1884693986976575824, guid: ed60fdf68adcd9a44b7bcd9d62e61140, type: 3}
   cardAnchor: {fileID: 1078118033}
-  maximumAngle: 70
-  maximumVeticalOffset: 150
+  maximumAngle: 90
+  maximumVeticalOffset: 200
 --- !u!4 &1642683057
 Transform:
   m_ObjectHideFlags: 0

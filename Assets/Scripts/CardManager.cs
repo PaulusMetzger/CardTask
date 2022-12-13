@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    [SerializeField] private int cardQuantaty;
+    [SerializeField, Min(0), Header("ставится 0 для случайного числа карт")] private int cardQuantaty;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private RectTransform cardAnchor;
     [SerializeField, Header ("максимальный угол поворота крайней карты")] private float maximumAngle;
@@ -13,8 +13,15 @@ public class CardManager : MonoBehaviour
     private GameObject newCard;
     private const float LOCATION_COEFFICENT = 0.042f;
 
+
     private void Start()
-    {        
+    {
+        int quantity = Random.Range(1, 9);
+        if (cardQuantaty == 0)
+        {
+            cardQuantaty = quantity;
+        }        
+
         for (int i=0; i < cardQuantaty; i++)
         {
             newCard = Instantiate(cardPrefab, cardAnchor);
@@ -51,14 +58,8 @@ public class CardManager : MonoBehaviour
     private float GetVerticalOffset(float offset)
     {
         float verticalOffset = 0;
-        if (offset < 0)
-        {
-            verticalOffset = offset * maximumVeticalOffset / (Screen.width * 0.5f);
-        }
-        else
-        {
-            verticalOffset = -offset * maximumVeticalOffset / (Screen.width * 0.5f);
-        }
+        verticalOffset = offset < 0 ? offset * maximumVeticalOffset / (Screen.width * 0.5f)
+            : verticalOffset = -offset * maximumVeticalOffset / (Screen.width * 0.5f);
         return verticalOffset;
     }
 }
