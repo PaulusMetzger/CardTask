@@ -287,6 +287,7 @@ MonoBehaviour:
   mana: {fileID: 8521440848074395317}
   health: {fileID: 440776367197932143}
   attack: {fileID: 8565820744848742337}
+  cardLoadedImage: {fileID: 1884693987374820935}
 --- !u!1 &1884693987229812334
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0671769, g: 0.5350139, b: 0.9622642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -11,12 +11,14 @@ public class CardManager : MonoBehaviour
     [SerializeField, Header("максимальный сдвиг карты по вертикали")] private float maximumVeticalOffset;
 
     private GameObject newCard;
+    private List<Card> cardsList = new List<Card>();
     private const float LOCATION_COEFFICENT = 0.042f;
+    private int currentActiveCard;
 
 
     private void Start()
     {
-        int quantity = Random.Range(1, 9);
+        int quantity = Random.Range(4, 7);
         if (cardQuantaty == 0)
         {
             cardQuantaty = quantity;
@@ -25,6 +27,9 @@ public class CardManager : MonoBehaviour
         for (int i=0; i < cardQuantaty; i++)
         {
             newCard = Instantiate(cardPrefab, cardAnchor);
+            Card card = newCard.GetComponent<Card>();
+            card.Init();
+            cardsList.Add(card);
             float offset = GetOffset(i);    
             float verticalOffset = GetVerticalOffset(offset);
             newCard.transform.localPosition = new Vector2(newCard.transform.localPosition.x + offset, 
@@ -61,5 +66,15 @@ public class CardManager : MonoBehaviour
         verticalOffset = offset < 0 ? offset * maximumVeticalOffset / (Screen.width * 0.5f)
             : verticalOffset = -offset * maximumVeticalOffset / (Screen.width * 0.5f);
         return verticalOffset;
+    }
+
+    public void ChangeActiveCardValue()
+    {
+        cardsList[currentActiveCard].ChangeFieldsValues();
+        currentActiveCard++;
+        if (currentActiveCard > cardsList.Count-1)
+        {
+            currentActiveCard = 0;
+        }
     }
 }
