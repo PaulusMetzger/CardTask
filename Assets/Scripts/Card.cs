@@ -38,7 +38,7 @@ public class Card : MonoBehaviour
 
     public void ChangeFieldsValues()
     {
-        int valueForChange = Random.Range(1, 3);
+        int valueForChange = Random.Range(1, 4);
         switch (valueForChange)
         {
             case 1:
@@ -49,6 +49,8 @@ public class Card : MonoBehaviour
                 break;
             case 3:
                 ChangeAttakValue();
+                break;
+            default:
                 break;
         }
     }
