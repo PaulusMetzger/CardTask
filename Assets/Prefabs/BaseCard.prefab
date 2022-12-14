@@ -284,10 +284,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2105fed67a4c10e4db0e963b6fd72162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mana: {fileID: 8521440848074395317}
-  health: {fileID: 440776367197932143}
-  attack: {fileID: 8565820744848742337}
+  manaText: {fileID: 8521440848074395317}
+  healthText: {fileID: 440776367197932143}
+  attackText: {fileID: 8565820744848742337}
   cardLoadedImage: {fileID: 1884693987374820935}
+  duration: 1
+  CountFPS: 1
 --- !u!1 &1884693987229812334
 GameObject:
   m_ObjectHideFlags: 0

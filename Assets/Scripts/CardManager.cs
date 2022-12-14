@@ -15,7 +15,6 @@ public class CardManager : MonoBehaviour
     private const float LOCATION_COEFFICENT = 0.042f;
     private int currentActiveCard;
 
-
     private void Start()
     {
         int quantity = Random.Range(4, 7);
@@ -50,7 +49,6 @@ public class CardManager : MonoBehaviour
         float stepSize = Screen.width * LOCATION_COEFFICENT;
         float stepLenght = stepSize * steps;
         float anchorOffset = -stepLenght / 2 + stepSize * i;
-        //Debug.Log($"anchorOffset {anchorOffset}");
         return anchorOffset;
     }
 
@@ -70,11 +68,18 @@ public class CardManager : MonoBehaviour
 
     public void ChangeActiveCardValue()
     {
-        cardsList[currentActiveCard].ChangeFieldsValues();
-        currentActiveCard++;
-        if (currentActiveCard > cardsList.Count-1)
+        if (currentActiveCard > cardsList.Count - 1)
         {
             currentActiveCard = 0;
         }
+        Card currentCard = cardsList[currentActiveCard];
+        currentCard.ChangeFieldsValues();
+        if (currentCard.HP <= 0)
+        {
+            cardsList.Remove(currentCard);
+            Destroy(currentCard.gameObject);
+            return;
+        }
+        currentActiveCard++;        
     }
 }
