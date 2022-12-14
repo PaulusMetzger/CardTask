@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CardManager : MonoBehaviour
 {
@@ -31,11 +32,31 @@ public class CardManager : MonoBehaviour
             cardsList.Add(card);
             float offset = GetOffset(i);    
             float verticalOffset = GetVerticalOffset(offset);
-            newCard.transform.localPosition = new Vector2(newCard.transform.localPosition.x + offset, 
-                newCard.transform.localPosition.y + verticalOffset);
+            Vector3 cardLocalPosition = newCard.transform.localPosition;
+            newCard.transform.localPosition = new Vector2(cardLocalPosition.x + offset,
+                cardLocalPosition.y + verticalOffset);
+
             float angle = GetAngle(offset);
             newCard.transform.eulerAngles = new Vector3(newCard.transform.eulerAngles.x, newCard.transform.eulerAngles.y, angle);
         }
+    }
+
+    public void ChangeActiveCardValue()
+    {
+        if (currentActiveCard > cardsList.Count - 1)
+        {
+            currentActiveCard = 0;
+        }
+        Card currentCard = cardsList[currentActiveCard];
+        currentCard.ChangeFieldsValues();
+        if (currentCard.HP <= 0)
+        {
+            cardsList.Remove(currentCard);
+            Destroy(currentCard.gameObject);
+            ChangeCurrentCardsPosition();
+            return;
+        }
+        currentActiveCard++;
     }
 
     private float GetOffset(int i)
@@ -66,20 +87,22 @@ public class CardManager : MonoBehaviour
         return verticalOffset;
     }
 
-    public void ChangeActiveCardValue()
+    private void ChangeCurrentCardsPosition()
     {
-        if (currentActiveCard > cardsList.Count - 1)
+        for(int i = 0; i < cardsList.Count; i++)
         {
-            currentActiveCard = 0;
+            Transform cardTransform = cardsList[i].gameObject.transform;
+            Vector3 currentPosition = cardTransform.localPosition;
+            cardQuantaty= cardsList.Count;
+            float horizontalOffset = GetOffset(i);
+            float verticalOffset = GetVerticalOffset(horizontalOffset);
+            Vector3 newCardPosition = new Vector3(horizontalOffset, verticalOffset, currentPosition.z);
+            DOTween.To(() => cardTransform.localPosition, x => cardTransform.localPosition = x, newCardPosition, 0.5f);
+
+            float currentAngle = cardTransform.eulerAngles.z;
+            float newAngle = GetAngle(horizontalOffset);
+            Vector3 newEulerAngles = new Vector3(cardTransform.eulerAngles.x, cardTransform.eulerAngles.y, newAngle);
+            cardTransform.DORotate(newEulerAngles, 1f);
         }
-        Card currentCard = cardsList[currentActiveCard];
-        currentCard.ChangeFieldsValues();
-        if (currentCard.HP <= 0)
-        {
-            cardsList.Remove(currentCard);
-            Destroy(currentCard.gameObject);
-            return;
-        }
-        currentActiveCard++;        
-    }
+    }    
 }

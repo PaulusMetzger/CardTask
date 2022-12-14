@@ -79,6 +79,7 @@ public class Card : MonoBehaviour
         currentText = manaText;
         newValue = Mana;
         UpdateText(previousValue, newValue);
+        Debug.Log($"mana value has changed from {previousValue} to {newValue}");
     }
 
     private void ChangeHPValue()
@@ -88,6 +89,7 @@ public class Card : MonoBehaviour
         currentText = healthText;
         newValue = HP;
         UpdateText(previousValue, newValue);
+        Debug.Log($"HP value has changed from {previousValue} to {newValue}");
     }
 
     private void ChangeAttakValue()
@@ -97,6 +99,7 @@ public class Card : MonoBehaviour
         currentText = attackText;
         newValue = Attack;
         UpdateText(previousValue, newValue);
+        Debug.Log($"Attack value has changed from {previousValue} to {newValue}");
     }
 
     private int GetRandomValue( int minValue = -2)
