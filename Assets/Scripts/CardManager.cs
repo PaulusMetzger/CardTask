@@ -18,31 +18,18 @@ public class CardManager : MonoBehaviour
 
     private void Start()
     {
-        int quantity = Random.Range(4, 7);
-        if (cardQuantaty == 0)
-        {
-            cardQuantaty = quantity;
-        }        
-
-        for (int i=0; i < cardQuantaty; i++)
-        {
-            newCard = Instantiate(cardPrefab, cardAnchor);
-            Card card = newCard.GetComponent<Card>();
-            card.Init();
-            cardsList.Add(card);
-            float offset = GetOffset(i);    
-            float verticalOffset = GetVerticalOffset(offset);
-            Vector3 cardLocalPosition = newCard.transform.localPosition;
-            newCard.transform.localPosition = new Vector2(cardLocalPosition.x + offset,
-                cardLocalPosition.y + verticalOffset);
-
-            float angle = GetAngle(offset);
-            newCard.transform.eulerAngles = new Vector3(newCard.transform.eulerAngles.x, newCard.transform.eulerAngles.y, angle);
-        }
+        GetInitialCardSet();
     }
 
     public void ChangeActiveCardValue()
     {
+        if (cardsList.Count == 0)
+        {
+            cardQuantaty = 0;
+            GetInitialCardSet();
+            return;
+        }
+
         if (currentActiveCard > cardsList.Count - 1)
         {
             currentActiveCard = 0;
@@ -57,6 +44,31 @@ public class CardManager : MonoBehaviour
             return;
         }
         currentActiveCard++;
+    }
+
+    private void GetInitialCardSet()
+    {
+        int quantity = Random.Range(4, 7);
+        if (cardQuantaty == 0)
+        {
+            cardQuantaty = quantity;
+        }
+
+        for (int i = 0; i < cardQuantaty; i++)
+        {
+            newCard = Instantiate(cardPrefab, cardAnchor);
+            Card card = newCard.GetComponent<Card>();
+            card.Init();
+            cardsList.Add(card);
+            float offset = GetOffset(i);
+            float verticalOffset = GetVerticalOffset(offset);
+            Vector3 cardLocalPosition = newCard.transform.localPosition;
+            newCard.transform.localPosition = new Vector2(cardLocalPosition.x + offset,
+                cardLocalPosition.y + verticalOffset);
+
+            float angle = GetAngle(offset);
+            newCard.transform.eulerAngles = new Vector3(newCard.transform.eulerAngles.x, newCard.transform.eulerAngles.y, angle);
+        }
     }
 
     private float GetOffset(int i)
